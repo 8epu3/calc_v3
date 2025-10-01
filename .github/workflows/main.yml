@@ -23,3 +23,9 @@ jobs:
     - name: Run tests
       run: |
         pytest
+    - name: Run tests with coverage
+      run: |
+        pytest --cov=app tests/
+    - name: Check coverage
+      run: |
+        coverage report --fail-under=100
