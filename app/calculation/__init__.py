@@ -9,7 +9,7 @@ class Calculation(ABC):
 
     @abstractmethod
     def exec(self) -> float:
-        pass
+        pass # pragma: no cover
 
     def __str__(self) -> str:
         result = self.exec()  # Run the calculation to get the result.

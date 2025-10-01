@@ -405,51 +405,18 @@ def test_calculator_unexpected_exception(monkeypatch, capsys):
     assert "An error occurred during calculation:" in captured.out
     assert "Please try again." in captured.out
 
+def test_parse_input_add(): 
+    assert parse_input("1 + 2") == ("add", 1.0, 2.0)
 
-"""
-from app.calculator import *
-from io import StringIO
-import sys
-import pytest
+def test_parse_input_sub(): 
+    assert parse_input("3 - 1") == ("sub", 3.0, 1.0)
 
-def simulate_expression_input(monkeypatch, inputs):
+def test_parse_input_mul(): 
+    assert parse_input("2 * 3") == ("mul", 2.0, 3.0)
 
-    next_input = iter(inputs)
-    monkeypatch.setattr('builtins.input', lambda _: next(next_input))
+def test_parse_input_div(): 
+    assert parse_input("8 / 2") == ("div", 8.0, 2.0)
 
-    captured_output = StringIO()
-    sys.stdout = captured_output
-    Calculator()
-    sys.stdout = sys.__stdout__
-    return captured_output.getvalue()
-    
-
-
-@pytest.mark.parametrize(
-    "inputs, expected",
-    [
-        (["2 + ","exit"], "ERROR:  Wrong expression format."),
-        ([" + 2","exit"], "ERROR:  Wrong expression format."),
-        (["2 2","exit"], "ERROR:  Wrong expression format."),
-        (["2+2","exit"], "ERROR:  Wrong expression format."),
-        (["","exit"], "ERROR:  Wrong expression format."),
-
-    ],
-    ids=[
-        "missing_first_number",
-        "missing_second_number",
-        "missing_operator",
-        "no_spaces",
-        "blank_expression",
-    ],
-)
-
-def test_expression_format(monkeypatch, inputs, expected):
-    output = simulate_expression_input(monkeypatch, inputs)
-    assert expected in output, f"The inputs: {inputs} do not output: {expected}, but outputs {output}"
-
-def test_exit(monkeypatch):
-    inputs = ["exit"]
-    output = simulate_expression_input(monkeypatch, inputs)
-    assert "Good-bye" in output
-"""
+def test_parse_input_invalid_operator(): 
+    with pytest.raises(ValueError):
+        parse_input("1 % 2")

@@ -6,11 +6,11 @@ Follow these steps to get the project running on your system.
 
 ### clone repo
 
-`git clone https://github.com/8epu3/calc_v2.git`
+`git clone https://github.com/8epu3/calc_v3.git`
 
 #### change directory
 
-`cd calc_v2`
+`cd calc_v3`
 
 ### create python virtual environment
 
@@ -30,6 +30,6 @@ Follow these steps to get the project running on your system.
 
 `python main.py`
 
-## To run test
+## To run test with coverage
 
-`pytest`
+`pytest --cov=app test/`
